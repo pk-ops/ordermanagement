@@ -39,7 +39,7 @@ function ViewCategory(props) {
         viewCategory_HTMLTABLE=
         categoryList.map((item)=>{
             return(
-                <tr>
+                <tr >
                     <td>{item.name}</td>
                     <td>{item.slug}</td>
                     <td>{item.status}</td>

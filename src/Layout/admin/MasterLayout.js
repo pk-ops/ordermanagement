@@ -14,6 +14,9 @@ import Category from '../../components/admin/category/Category';
 import ViewCategory from '../../components/admin/category/ViewCategory';
 import AddProduct from '../../components/admin/product/AddProduct';
 import ViewProduct from '../../components/admin/product/ViewProduct';
+import EditProduct from '../../components/admin/product/EditProduct';
+
+
 
 const MasterLayout=({flow})=> {
     return (
@@ -35,6 +38,9 @@ const MasterLayout=({flow})=> {
                                     "view-category":<ViewCategory/>,
                                     "add-product":<AddProduct/>,
                                     "view-product":<ViewProduct/>,
+                                    "editpro":<EditProduct/>,
+                                    
+                                    
                                 }[flow]
                             }
                         </section>

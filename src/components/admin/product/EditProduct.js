@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
-function AddProduct() {
+function EditProduct(props) {
+
+    const Navigate=useNavigate();
 
     const [categoryList,setCategoryList]=useState([]);
     
     const [productInput,setProductInput]=useState({
-        
-        // category_id:'',
-        category_name:'',
         id:'',
+        category_name:'',
         slug:'',
         name:'',
         descript:'',
@@ -39,7 +39,7 @@ function AddProduct() {
     // }
 
 
-    const getCategory=()=>{
+    const getProduct=()=>{
         fetch(`http://localhost:5000/admin/viewcategory`)
         .then((res)=>res.json())
         .then((data)=>{
@@ -48,14 +48,32 @@ function AddProduct() {
             
         });
         
-    };useEffect(()=>getCategory(),)
+    };useEffect(()=>getProduct(),)
 
-    const submitProduct=(e)=>{
+
+    const {id}=useParams();
+    // console.log(id);
+
+
+    const getDetails=()=>{
+        fetch(`http://localhost:5000/admin/editpro/${id}`,{
+          method:"GET"
+        })
+        .then((res)=>res.json())
+        .then((data)=>{
+            // console.log(data)
+            setProductInput(data);
+        })
+      };
+      useEffect(()=>getDetails(),[]);
+
+
+
+    const  updateProduct=(e)=>{
         e.preventDefault();
-
+        // const {id}=useParams();
         const data={
             img:productInput.img,
-            id:productInput.id,
             category_name:productInput.category_name,
             slug:productInput.slug,
             name:productInput.name,
@@ -74,8 +92,8 @@ function AddProduct() {
             status:productInput.status,
 
         }
-        console.log(data);
-        fetch("http://localhost:5000/admin/addProduct", {
+        // console.log(data);
+        fetch(`http://localhost:5000/admin/updateProduct/${id}`, {
             method: "POST",
             crossDomain: true,
             headers: {
@@ -87,8 +105,9 @@ function AddProduct() {
         }).then((res) => res.json())
             .then((data) => {
                 console.log(data)
-                if(data.status=='ok'){
-                    alert("Product Added")
+                if(data.status==='ok'){
+                    alert("Product Updated")
+                    Navigate('/view-product')
                     
                 }
                 else{
@@ -104,12 +123,12 @@ function AddProduct() {
         <div className='container-fluid px-4'>
             <div className='card mt-4'>
                 <div className='card-header'>
-                    <h4>Add Product
+                    <h4>Edit Product
                         <Link to="/view-product" className="btn btn-primary btn-sm float-end">View Product</Link>
                     </h4>
                 </div>
                 <div className='card-body'>
-                    <form onSubmit={submitProduct} encType='multipart/form-data'>
+                    <form onSubmit={updateProduct} encType='multipart/form-data'>
                     <ul className="nav nav-tabs" id="myTab" role="tablist">
                         <li className="nav-item" role="presentation">
                             <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
@@ -125,7 +144,7 @@ function AddProduct() {
                           <div className="tab-pane card-body border fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" >
                         <div className='form-group mb-3'>
                             <label>Select Category</label>
-                            <select name='category_name' onChange={handleInput} value={productInput.category_name} className='form-group'>
+                            <select name='category_id' onChange={handleInput} value={productInput.category_id} className='form-group'>
                                 <option>Select Category</option>
                                 {
                                     categoryList.map((item)=>{
@@ -136,20 +155,11 @@ function AddProduct() {
                                 }
                             </select>
                         </div>
-
-                        <div className='form-group mb-3'>
-                            <label>Id</label>
-                            <input type='text' name='id' onChange={handleInput} value={productInput.id}  className='form-control' />
-
-                        </div>
-
                         <div className='form-group mb-3'>
                             <label>Slug</label>
                             <input type='text' name='slug' onChange={handleInput} value={productInput.slug} className='form-control' />
 
                         </div>
-                        
-
                         <div className='form-group mb-3'>
                             <label>Name</label>
                             <input type='text' name='name' onChange={handleInput} value={productInput.name}  className='form-control' />
@@ -225,7 +235,7 @@ function AddProduct() {
                           </div>
 
                          </div>
-                         <button className='btn btn-primary px-4 mt-2' type='submit'>Submit</button>
+                         <button className='btn btn-primary px-4 mt-2' type='submit' >Submit</button>
                     </form>
                 </div>
             </div>
@@ -233,4 +243,4 @@ function AddProduct() {
     );
 }
 
-export default AddProduct;
+export default EditProduct;

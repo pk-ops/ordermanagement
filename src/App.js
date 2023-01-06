@@ -12,6 +12,8 @@ import 'bootstrap5/src/js/bootstrap.bundle.min.js'
 
 import MasterLayout from './Layout/admin/MasterLayout';
 import Admin from './components/Frontend/auth/Admin';
+import ViewCategoryColl from './components/Frontend/Collection/ViewCategoryColl';
+import ViewProductColl from './components/Frontend/Collection/ViewProductColl';
 
 function App() {
   return (
@@ -20,7 +22,9 @@ function App() {
       
       <Router>
         <Routes>
-             <Route path='/' element={<Home/>}/> 
+             <Route path='/' element={<Home/>}/>
+             <Route path='/viewCcoll' element={<ViewCategoryColl/>}/> 
+             <Route path='/viewCcoll/:slug' element={<ViewProductColl/>}/> 
              <Route path='/login' element={<Login/>}/> 
              <Route path='/Adminnn' element={<Admin/>}/> 
              <Route path='/register' element={<Register/>}/> 
@@ -31,6 +35,9 @@ function App() {
             <Route path='/view-category' element={<MasterLayout flow="view-category"/>}/>
             <Route path='/add-product' element={<MasterLayout flow="add-product"/>}/>
             <Route path='/view-product' element={<MasterLayout flow="view-product"/>}/>
+            <Route path='/editpro/:id' element={<MasterLayout flow="editpro"/>}/>
+           
+          
        </Routes>
 
       </Router>

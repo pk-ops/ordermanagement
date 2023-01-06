@@ -35,7 +35,7 @@ const Sidebar=()=> {
                     <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                     Profile
                 </Link>
-                <div className="sb-sidenav-menu-heading">Interface</div>
+                {/* <div className="sb-sidenav-menu-heading">Interface</div>
                 <Link className="nav-link collapsed" to="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                     <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
                     Layouts
@@ -51,8 +51,8 @@ const Sidebar=()=> {
                     <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
                     Pages
                     <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                </Link>
-                <div className="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                </Link> */}
+                {/* <div className="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav className="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                         <Link className="nav-link collapsed" to="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
                             Authentication
@@ -77,16 +77,22 @@ const Sidebar=()=> {
                             </nav>
                         </div>
                     </nav>
-                </div>
-                <div className="sb-sidenav-menu-heading">Addons</div>
+                </div> */}
+
+
+                {/* <div className="sb-sidenav-menu-heading">Addons</div>
                 <Link className="nav-link" to="charts.html">
                     <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
                     Charts
                 </Link>
+
                 <Link className="nav-link" to="tables.html">
                     <div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>
                     Tables
-                </Link>
+                </Link> */}
+
+
+
             </div>
         </div>
         <div className="sb-sidenav-footer">

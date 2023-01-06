@@ -10,10 +10,7 @@ function ViewProduct() {
         fetch(`http://localhost:5000/admin/viewproduct`)
         .then((res)=>res.json())
         .then((data)=>{
-                setProduct(data);
-           
-             
-            
+                setProduct(data);     
         });
         setLoading(false)
     };useEffect(()=>getProduct(),)
@@ -25,12 +22,15 @@ function ViewProduct() {
     }else{
         display_Productdata= ViewProduct.map((item)=>{
                 return(
-                    <tr>
-                        <td>{item.category_id}</td>
+                    <tr key={item.id}>
+                        <td>{item.id}</td>
+                        <td>{item.category_name}</td>
                         <td>{item.name}</td>
                         <td>{item.selling_price}</td>
-                        <td><img src={item.image} width="50px" alt={item.name}   /></td>
-                        <td><Link to='edit-product' className='btn btn-success btn-sm'>Edit</Link></td>
+                        <td><img src={item.image} width="50px" height="50px" alt={item.name} /></td>
+                        <td>
+                            <Link to={`/editpro/${item.id}`} className='btn btn-success btn-sm'>Edit</Link>
+                            </td>
                         <td><Link to='delete-product' className='btn btn-danger btn-sm'>Delete</Link></td>
                     </tr>
                 )
@@ -41,7 +41,7 @@ function ViewProduct() {
         <div className="card px-4 mt-3">
             <div className='card-header'>
                 <h4>View Product
-                    <Link to='/admin/add-product' className='btn btn-success btn-sm float-end'>Add Product</Link>
+                    <Link to='/add-product' className='btn btn-success btn-sm float-end'>Add Product</Link>
                 </h4>
             </div>
             <div className="card-body">
@@ -49,16 +49,17 @@ function ViewProduct() {
                     <table className='table table-bordered table-striped'>
                         <thead> 
                             <tr>
-                                <th>Category_ID</th>
-                                <th>Name</th>
+                                <th>ID</th>
+                                <th>Category_Name</th>
+                                <th>Product Name</th>
                                 <th>Selling price</th>
                                 <th>Image</th>
-                                <th>Edit</th>/
+                                <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
-                        {display_Productdata}
+                                {display_Productdata}
                         </tbody>
                      </table>
                 </div>
