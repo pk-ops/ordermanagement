@@ -20,6 +20,7 @@ function ViewCategory(props) {
     //     setLoading(false);
         
     // },[]);
+   
     const getCategory=()=>{
         fetch(`http://localhost:5000/admin/viewcategory`)
         .then((res)=>res.json())

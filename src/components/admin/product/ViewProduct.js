@@ -10,7 +10,11 @@ function ViewProduct() {
         fetch(`http://localhost:5000/admin/viewproduct`)
         .then((res)=>res.json())
         .then((data)=>{
-                setProduct(data);     
+            // if(data.status==200){
+                setProduct(data); 
+                
+            // }
+                   
         });
         setLoading(false)
     };useEffect(()=>getProduct(),)
@@ -24,8 +28,8 @@ function ViewProduct() {
                 return(
                     <tr key={item.id}>
                         <td>{item.id}</td>
-                        <td>{item.category_name}</td>
                         <td>{item.name}</td>
+                        <td>{item.brand}</td>
                         <td>{item.selling_price}</td>
                         <td><img src={item.image} width="50px" height="50px" alt={item.name} /></td>
                         <td>

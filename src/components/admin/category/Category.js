@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 function Category() {
 
     const [categoryInput,setCategory]=useState({
-     
+        id:'',
         slug:'',
         name:'',
         descript:'',
@@ -23,7 +23,7 @@ const submitCategory=(e)=>{
     e.preventDefault();
 
     const data={
-        
+        id:categoryInput.id,
         slug:categoryInput.slug,
         name:categoryInput.name,
         descript:categoryInput.descript,
@@ -71,6 +71,11 @@ const submitCategory=(e)=>{
                 </ul>
                 <div className="tab-content" id="myTabContent">
                     <div className="tab-pane card-body border fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" >
+                    <div className='form-group mb-3'>
+                            <label>ID</label>
+                            <input type='text' name='id' onChange={handleInput} value={categoryInput.id} className='form-control w-25 ' />
+
+                        </div>
                         <div className='form-group mb-3'>
                             <label>Slug</label>
                             <input type='text' name='slug' onChange={handleInput} value={categoryInput.slug} className='form-control' />
