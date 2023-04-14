@@ -1,6 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { API } from '../../../global';
+
 
 function ViewCategory(props) {
 
@@ -8,7 +10,7 @@ function ViewCategory(props) {
     const [categoryList,setCategoryList]=useState([]);
 
     // useEffect(()=>{
-    //     fetch("http://localhost:5000/admin/viewcategory", {//options => (optional)
+    //     fetch("${API}/admin/viewcategory", {//options => (optional)
     //         method: 'GET' 
     //     }).then((res) => res.json())
     //     .then((data) => {
@@ -22,7 +24,7 @@ function ViewCategory(props) {
     // },[]);
    
     const getCategory=()=>{
-        fetch(`http://localhost:5000/admin/viewcategory`)
+        fetch(`${API}/admin/viewcategory`)
         .then((res)=>res.json())
         .then((data)=>{
                 setCategoryList(data)

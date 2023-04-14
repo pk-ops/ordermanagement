@@ -1,0 +1,26 @@
+.cart-icon{
+    position: absolute;
+    right: 100px;
+    margin: 20px;
+}
+.card-body image {
+    align-items: center;
+
+    display: flex;
+}
+
+.card-body>p{
+    margin-top: 50px;
+}
+
+.cart-button{
+    position: absolute;
+    top: 250px;
+    margin-left: 270px;
+}
+
+.cart-button>Button{
+    margin: auto;
+    background-color: yellow;
+    border: 0.5px solid black;
+}

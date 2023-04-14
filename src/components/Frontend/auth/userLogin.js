@@ -1,11 +1,16 @@
 import userEvent from '@testing-library/user-event';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Navbar from '../../../Layout/frontend/Navbar';
+import CommonContext from '../../../context/commonContext';
+import { API } from '../../../global';
+
 
 const Login = () => {
 
     let navigate = useNavigate();
+
+    const {isLoggedIn, SetIsLoggedIn } = useContext(CommonContext);
+
     const [Input, setInput] = useState({
         email: '',
         password: '',
@@ -25,10 +30,10 @@ const Login = () => {
             email: Input.email,
             password: Input.password,
         }
-        console.log(data.email, data.password)
+        // console.log(data.email, data.password)
         // const {fname,email,password}=data;
         // console.log(data)
-        fetch(`http://localhost:5000/users/login`, {
+        fetch(`${API}/users/login`, {
             method: "POST",
             crossDomain: true,
             headers: {
@@ -39,30 +44,18 @@ const Login = () => {
             body: JSON.stringify(data),
         }).then((res) => res.json())
             .then((data) => {
-                console.log(data)
-             
-            //     console.log(data.user)
-            //     if(data.user.type=='user'){
-                   
-            //         if (data.status === "ok"){
-            //             alert("Login successful");
-            //     } 
-            //     navigate('/')
-            //      }
-            //    else{
-            //         alert("error");
-            //     }
-                
-            if(data.role==='User'){
-                   
-                if (data.status === "ok"){
+           
+            console.log(data.role)
+            if(data.role=='User')
+                   {
                     alert("Login successful");
-            
+                    localStorage.setItem("x-auth-token",data.token)
+                    localStorage.setItem("id", data.id);
+                    localStorage.setItem("username", data.name);
+                    SetIsLoggedIn(true)
                     navigate('/')
-            } 
-             }
-           else{
-                alert("error");
+            }  else{
+                alert(data.message);
             }
                
             })
@@ -71,7 +64,7 @@ const Login = () => {
 
     return (
         <div>
-            <Navbar />
+           
             <div className='container py-5'>
                 <div className='row justify-content-center'>
                     <div className='col-md-6'>

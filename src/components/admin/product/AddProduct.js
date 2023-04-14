@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { API } from '../../../global';
 function AddProduct() {
 
     const [categoryList,setCategoryList]=useState([]);
@@ -18,10 +18,11 @@ function AddProduct() {
         meta_keyword:'',
         meta_description:'',
         
-        selling_price:'',
+        price:'',
         original_price:'',
         qty:'',
         brand:'',
+        rating:'',
         img:'',
         featured:'',   
         popular:'',
@@ -34,13 +35,10 @@ function AddProduct() {
         setProductInput({...productInput,[e.target.name]:e.target.value})
     }
 
-    // const handleImage=(e)=>{
-    //     setPicture({image:e.target.files[0]});
-    // }
 
 
     const getCategory=()=>{
-        fetch(`http://localhost:5000/admin/viewcategory`)
+        fetch(`${API}/admin/viewcategory`)
         .then((res)=>res.json())
         .then((data)=>{
                 setCategoryList(data);
@@ -65,9 +63,10 @@ function AddProduct() {
             meta_keyword:productInput.meta_keyword,
             meta_description:productInput.meta_description,
 
-            selling_price:productInput.selling_price,
+            price:productInput.price,
             original_price:productInput.original_price,
             qty:productInput.qty,
+            rating:productInput.rating,
             brand:productInput.brand,
             featured:productInput.featured,
             popular:productInput.popular,
@@ -75,7 +74,7 @@ function AddProduct() {
 
         }
         console.log(data);
-        fetch("http://localhost:5000/admin/addProduct", {
+        fetch(`${API}/admin/addProduct`, {
             method: "POST",
             crossDomain: true,
             headers: {
@@ -165,7 +164,7 @@ function AddProduct() {
 
                           </div>
 
-                          <div class="tab-pane card-body border fade" id="seotags" role="tabpanel" aria-labelledby="seotags-tab">
+                          <div className="tab-pane card-body border fade" id="seotags" role="tabpanel" aria-labelledby="seotags-tab">
                             
                         <div className='form-group mb-3'>
                             <label>Meta Title</label>
@@ -189,7 +188,7 @@ function AddProduct() {
                             <div className='row'>
                                 <div className='col-md-4 form-group mb-3'>
                                     <label>Selling price</label>
-                                    <input type="text" name="selling_price" onChange={handleInput} value={productInput.selling_price} className="form-control"/>
+                                    <input type="text" name="price" onChange={handleInput} value={productInput.price} className="form-control"/>
                                 </div>
                                 <div className='col-md-4 form-group mb-3'>
                                     <label>Original price</label>
@@ -206,7 +205,11 @@ function AddProduct() {
 
                                 </div>   <div className='col-md-4 form-group mb-3'>
                                     <label>Image</label>
-                                    <input type="file" name="img" onChange={handleInput} value={productInput.img} className="form-control"/>
+                                    <input type="url" name="img" placeholder='please enter your img url' onChange={handleInput} value={productInput.img} className="form-control"/>
+                                </div>
+                                <div className='col-md-4 form-group mb-3'>
+                                    <label>Rating</label>
+                                    <input type="text" name="rating" placeholder='please enter Rating of product' onChange={handleInput} value={productInput.rating} className="form-control"/>
                                 </div>
                                 <div className='col-md-4 form-group mb-3'>
                                     <label>Featured (checkbox=shown)</label>

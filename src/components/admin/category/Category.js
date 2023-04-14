@@ -34,7 +34,7 @@ const submitCategory=(e)=>{
         
     }
     console.log(data)
-    fetch("http://localhost:5000/admin/category", {
+    fetch("${API}/admin/category", {
         method: "POST",
         crossDomain: true,
         headers: {

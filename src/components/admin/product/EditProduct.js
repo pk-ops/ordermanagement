@@ -1,68 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { API } from '../../../global';
 
 function EditProduct(props) {
 
-    const Navigate=useNavigate();
+    const navigate=useNavigate();
 
     const [categoryList,setCategoryList]=useState([]);
     
-    const [productInput,setProductInput]=useState({
-        id:'',
-        category_name:'',
-        slug:'',
-        name:'',
-        descript:'',
+    const [productInput,setProductInput]=useState([]);
 
-        meta_title:'',
-        meta_keyword:'',
-        meta_description:'',
-        
-        selling_price:'',
-        original_price:'',
-        qty:'',
-        brand:'',
-        img:'',
-        featured:'',   
-        popular:'',
-        status:'',
-
-    });
-// const[picture,setPicture]=useState([]);
 
     const handleInput=(e)=>{
         setProductInput({...productInput,[e.target.name]:e.target.value})
     }
 
-    // const handleImage=(e)=>{
-    //     setPicture({image:e.target.files[0]});
-    // }
 
 
     const getProduct=()=>{
-        fetch(`http://localhost:5000/admin/viewcategory`)
+        fetch(`${API}/admin/viewcategory`)
         .then((res)=>res.json())
         .then((data)=>{
                 setCategoryList(data);
-             
-            
         });
         
     };useEffect(()=>getProduct(),)
 
 
     const {id}=useParams();
-    // console.log(id);
-
+   
+    // console.log(id)
 
     const getDetails=()=>{
-        fetch(`http://localhost:5000/admin/editpro/${id}`,{
+        fetch(`${API}/admin/editpro/${id}`,{
           method:"GET"
         })
         .then((res)=>res.json())
         .then((data)=>{
-            // console.log(data)
-            setProductInput(data);
+             setProductInput(data);
         })
       };
       useEffect(()=>getDetails(),[]);
@@ -83,7 +58,7 @@ function EditProduct(props) {
             meta_keyword:productInput.meta_keyword,
             meta_description:productInput.meta_description,
 
-            selling_price:productInput.selling_price,
+            price:productInput.price,
             original_price:productInput.original_price,
             qty:productInput.qty,
             brand:productInput.brand,
@@ -93,8 +68,8 @@ function EditProduct(props) {
 
         }
         // console.log(data);
-        fetch(`http://localhost:5000/admin/updateProduct/${id}`, {
-            method: "POST",
+        fetch(`${API}/admin/updateProduct/${id}`, {
+            method: "PUT",
             crossDomain: true,
             headers: {
                 "Content-Type": "application/json",
@@ -107,7 +82,7 @@ function EditProduct(props) {
                 console.log(data)
                 if(data.status==='ok'){
                     alert("Product Updated")
-                    Navigate('/view-product')
+                    navigate('/view-product')
                     
                 }
                 else{
@@ -144,7 +119,7 @@ function EditProduct(props) {
                           <div className="tab-pane card-body border fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" >
                         <div className='form-group mb-3'>
                             <label>Select Category</label>
-                            <select name='category_id' onChange={handleInput} value={productInput.category_id} className='form-group'>
+                            <select name='category_name' onChange={handleInput} value={productInput.category_name} className='form-group'>
                                 <option>Select Category</option>
                                 {
                                     categoryList.map((item)=>{
@@ -175,7 +150,7 @@ function EditProduct(props) {
 
                           </div>
 
-                          <div class="tab-pane card-body border fade" id="seotags" role="tabpanel" aria-labelledby="seotags-tab">
+                          <div className="tab-pane card-body border fade" id="seotags" role="tabpanel" aria-labelledby="seotags-tab">
                             
                         <div className='form-group mb-3'>
                             <label>Meta Title</label>
@@ -195,11 +170,11 @@ function EditProduct(props) {
 
                           </div>
                        
-                          <div class="tab-pane card-body border fade" id="otherdetails" role="tabpanel" aria-labelledby="otherdetails-tab">
+                          <div className="tab-pane card-body border fade" id="otherdetails" role="tabpanel" aria-labelledby="otherdetails-tab">
                             <div className='row'>
                                 <div className='col-md-4 form-group mb-3'>
                                     <label>Selling price</label>
-                                    <input type="text" name="selling_price" onChange={handleInput} value={productInput.selling_price} className="form-control"/>
+                                    <input type="text" name="price" onChange={handleInput} value={productInput.price} className="form-control"/>
                                 </div>
                                 <div className='col-md-4 form-group mb-3'>
                                     <label>Original price</label>
@@ -216,7 +191,7 @@ function EditProduct(props) {
 
                                 </div>   <div className='col-md-4 form-group mb-3'>
                                     <label>Image</label>
-                                    <input type="file" name="img" onChange={handleInput} value={productInput.img} className="form-control"/>
+                                    <input type="url" name="img" onChange={handleInput} value={productInput.img} className="form-control"/>
                                 </div>
                                 <div className='col-md-4 form-group mb-3'>
                                     <label>Featured (checkbox=shown)</label>

@@ -2,10 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar=()=> {
+
+    
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top">
         <div className="container">
-          <Link className="navbar-brand" to="#">Navbar</Link>
+          <Link className="navbar-brand" to="#">Order Management</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -17,6 +20,7 @@ const Navbar=()=> {
               <li className="nav-item">
                 <Link className="nav-link" to="/viewCcoll">Collection</Link>
               </li>
+              
               <li className="nav-item">
                 <Link className="nav-link" to="/login">Login</Link>
               </li>
@@ -25,7 +29,7 @@ const Navbar=()=> {
                 <Link className="nav-link" to='/register'>Register</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link btn btn-danger btn-sm text-white" to='/register'>Logout</Link>
+                <Link className="nav-link btn-danger btn-sm   text-white" to='/register'>Logout</Link>
               </li>
             </ul>
             

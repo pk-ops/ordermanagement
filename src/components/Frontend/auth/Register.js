@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Navbar from '../../../Layout/frontend/Navbar';
 
 // import * as yup from 'yup'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { API } from '../../../global';
 // import { API } from "./global";
 
 // const formValidationSchema=yup.object({
@@ -24,10 +25,11 @@ const Register = () => {
         name: '',
         email: '',
         password: '',
-        role:'',
+        role: '',
 
     });
 
+    const navigate=useNavigate()
     const handleInput = (e) => {
 
         setRegister({ ...registerInput, [e.target.name]: e.target.value })
@@ -40,11 +42,10 @@ const Register = () => {
             name: registerInput.name,
             email: registerInput.email,
             password: registerInput.password,
-            role:registerInput.role,
+            role: registerInput.role,
         }
-        // const {fname,email,password}=data;
-        // console.log(data)
-        fetch(`http://localhost:5000/users/register`, {
+      
+        fetch(`${API}/users/register`, {
             method: "POST",
             crossDomain: true,
             headers: {
@@ -55,18 +56,22 @@ const Register = () => {
             body: JSON.stringify(data),
         }).then((res) => res.json())
             .then((data) => {
-                console.log(data)
-                if (data.status === "ok")
-                    alert("Registration Successful")
+               console.log(data)
+
+               if(data.message=="username already exists"){
+                    alert("User already exist")
+               }
+               else{
+                alert("registration successfully")
+                navigate("/login")
+               }
+               
+                   
             })
-
-        // axios.post(`https://62a97087ec36bf40bdb787e6.mockapi.io/EcomRegi`,data).then(res=>{
-
-        // });
     }
     return (
         <div>
-            <Navbar />
+            {/* <Navbar /> */}
             <div className='container py-5'>
                 <div className='row justify-content-center'>
                     <div className='col-md-6'>
@@ -115,19 +120,16 @@ const Register = () => {
                                             className='form-control' />
                                     </div>
                                     <div>
-
                                     </div>
 
-
-
                                     <div className="form-group dropdown my-2">
-                                        <select onChange={handleInput} 
-                                                 name="role"
-                                                 className='form-control'>
+                                        <select onChange={handleInput}
+                                            name="role"
+                                            className='form-control'>
                                             <option value="1" disabled="disabled" selected="selected">Please select a Role</option>
-                                            <option 
+                                            <option
                                                 value="User"
-                                                 >User</option>
+                                            >User</option>
                                             <option value="Admin">Admin</option>
                                         </select>
                                     </div>

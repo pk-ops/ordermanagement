@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../../../Layout/frontend/Navbar';
+import { API } from '../../../global';
+
 
 function ViewCategoryColl() {
     
@@ -8,7 +9,7 @@ function ViewCategoryColl() {
     const [cat,setCat] = useState([]);
     
     const getCategory=()=>{
-        fetch(`http://localhost:5000/admin/getCategory`)
+        fetch(`${API}/admin/getCategory`)
         .then((res)=>res.json())
         .then((data)=>{
              if(data.status==200){
@@ -46,7 +47,6 @@ function ViewCategoryColl() {
 
     return (
         <div>
-            <Navbar/>
             <div className='py-3 bg-warning'>
                 <div className='container'>
                     <h6>Category Page</h6>

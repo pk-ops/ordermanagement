@@ -17,17 +17,15 @@ const Admin = () => {
         setInput({ ...Input, [e.target.name]: e.target.value })
     }
 
-    const registerSubmit = (e) => {
+    const Submit = (e) => {
         e.preventDefault();
 
         const data = {
             email: Input.email,
             password: Input.password,
         }
-        // console.log(data.email, data.password)
-        // const {fname,email,password}=data;
-        // console.log(data)
-        fetch("http://localhost:5000/login-admin", {
+       
+        fetch("${API}/users/login-admin", {
             method: "POST",
             crossDomain: true,
             headers: {
@@ -40,13 +38,12 @@ const Admin = () => {
             .then((data) => {
                 console.log(data)
                 // console.log(data.user)
-                if(data.role==='Admin'){
-                   
-                    if (data.status === "ok"){
+                if(data.role=='Admin'){
                         alert("Login successful");
-                
+                        localStorage.setItem("x-auth-token",data.token)
+                        localStorage.setItem("id", data.id);
+                        localStorage.setItem("adminname", data.name);
                         navigate('/Dashboard')
-                } 
                  }
                else{
                     alert("error");
@@ -58,7 +55,7 @@ const Admin = () => {
 
     return (
         <div>
-            <Navbar />
+     
             <div className='container py-5'>
                 <div className='row justify-content-center'>
                     <div className='col-md-6'>
@@ -70,7 +67,7 @@ const Admin = () => {
                         
                             </div>
                             <div className="card-body">
-                                <form onSubmit={registerSubmit}>
+                                <form onSubmit={Submit}>
                                     <div className='form-group mb-3'>
                                         <label>Email Id</label>
                                         <input
