@@ -41,7 +41,16 @@ const handleClose = () => {
 
 
 const clearFun=()=>{
-  SetIsLoggedIn(false)
+  if(isLoggedIn){
+    localStorage.removeItem("x-auth-token")
+    localStorage.removeItem("id")
+    localStorage.removeItem("username")
+    SetIsLoggedIn(false) 
+    navigate("/login")
+  }else{
+    navigate("/login")
+  }
+   
 }
   return (
   
