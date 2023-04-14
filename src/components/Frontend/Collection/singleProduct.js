@@ -39,11 +39,9 @@ function SingleProd() {
                             {/* <div className='card-body'>
                                 <p className="product-price">{product.price}</p>
                             </div> */}
-                          {isLoggedIn=="true"? <div className='cart-button d-flex' >
+                          <div className='cart-button d-flex' >
                                 <Button onClick={()=>addItem(product)}>Add to cart</Button>
-                            </div>:<div className='cart-button d-flex'>
-                                    <Button onClick={()=>navigate("/login")}>Add to cart</Button>
-                                </div>}
+                            </div>
                         </div>
                     </div>
                 </CardContent>
