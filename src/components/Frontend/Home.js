@@ -1,11 +1,10 @@
 import { Button,Badge, ButtonGroup } from '@mui/material';
 
 import React, { useEffect } from 'react';
-import Navbar from '../../Layout/frontend/Navbar';
+
 
 import { useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
+
 import ProductsList from './productsList';
 import "./productList.css"
 import { useCart } from 'react-use-cart';
